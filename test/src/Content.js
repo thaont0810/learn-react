@@ -1,22 +1,20 @@
-import React, { Component, Fragment } from "react";
-import ActivityItem from "./ActivityItem";
+import React, { Component } from "react";
+import ActivityItem from "./components/ActivityItem";
+// import ActivityItem from "./components/GithubActivityItem";
 
 class Content extends Component {
   render() {
-    // const { activities } = this.props;
-    const activitiesArr = this.props.activities;
+    const { activities } = this.props;
+    // const activitiesArr = this.props.activities;
     // console.log(activities);
 
     return (
-      <Fragment>
-        <div className="content">
-          <div className="line" />
-
-          {activitiesArr.map(function(activity) {
-            return <ActivityItem activity={activity} />;
-          })}
-        </div>
-      </Fragment>
+      <div className="content">
+        <div className="line" />
+        {activities.map(activity => {
+          return <ActivityItem key={activity.user.id} activity={activity} />;
+        })}
+      </div>
     );
   }
 }

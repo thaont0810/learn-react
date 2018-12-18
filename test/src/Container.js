@@ -1,20 +1,52 @@
 import React, { Component } from "react";
-// import Header from "./Header";
-// import Content from './Content';
+import Header from "./components/Header";
+import Content from './Content07';
+import Footer from './components/Footer';
+
+// An async request
+const data = require('./data.json');
+const fetchEvents = () => Promise.resolve(data)
+                      .then(json => json.slice(0, 4))
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {refreshing: false}
+  }
+
+  // Bound to the refresh button
+  refresh() {
+    this.setState({refreshing: true})
+  }
+
+  // Callback from the `Content` component
+  onComponentRefresh() {
+    this.setState({refreshing: false});
+  }
+
   render() {
-    const { activities } = this.props;
+    const {refreshing} = this.state;
     return (
-      <div className="demo">
-        <div className="notificationsFrame">
-          <div className="panel">
-            {/* <Header title= 'Timeline' />
-            <Content  activities={activities}/> */}
-          </div>
+      <div className='notificationsFrame'>
+        <div className='panel'>
+          <Header title="Github activity" />
+          {/* refreshing is the component's state */}
+          <Content
+            onComponentRefresh={this.onComponentRefresh.bind(this)}
+            requestRefresh={refreshing}
+            fetchData={fetchEvents} />
+          {/* A container for styling */}
+          <Footer>
+            <button onClick={this.refresh.bind(this)}>
+              <i className="fa fa-refresh" />
+              Refresh
+            </button>
+          </Footer>
         </div>
       </div>
-    );
+    )
   }
 }
+
 export default App;
