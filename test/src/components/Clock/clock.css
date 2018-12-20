@@ -11,12 +11,12 @@
   font-family: 'Open Sans', sans-serif;
   text-align: center;
   font-size: 60px;
-  color: var(--textColor);
+  color: #FFF;
   line-height: 2.0em;
   background: #eee;
 
     /* Old browsers */
-  background: var(--firstColor);
+  background: gba(0, 169, 158, 1);
   /* W3C */
 
   /* .title {

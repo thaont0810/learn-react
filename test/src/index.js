@@ -1,15 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Content from "./Content";
-import Header from "./Header";
-// import Header from "./HeaderSearch";
 import Clock from "./components/Clock/Clock2";
 
-import * as serviceWorker from "./serviceWorker";
-// import Timeline from './components/Timeline/Timeline';
-import Container from './Container';
+import Content from "./Content";
+import Header from "./Header";
+import HeaderSearch from "./HeaderSearch";
 
+import Container from "./Container";
+import SimpleSearchHolder from "./SimpleSearchHolder";
+import SearchFormWithSubmit from "./SearchFormWithSubmit";
+import ContentSearch from "./ContentSearch";
+// import Timeline from './components/Timeline/Timeline';
+import * as serviceWorker from "./serviceWorker";
+import Notification from './Notification'
 const activityArr = [
   {
     timestamp: new Date().getTime(),
@@ -49,15 +53,24 @@ ReactDOM.render(
       <Clock />
       <Header title="Timeline" />
       <Content activities={activityArr} />
+      <Notification />
+      {/* <Container /> */}
+      {/* <ContentSearch /> */}
+      {/* <SimpleSearchHolder Component= {HeaderSearch}/> */}
     </div>
   </div>,
   document.getElementById("demo1")
 );
 
 ReactDOM.render(
-  <Container />,
-  document.getElementById('requestRefresh'));
+  <SimpleSearchHolder Component={SearchFormWithSubmit} />,
+  document.getElementById("searchFormWithSubmit")
+);
 
+ReactDOM.render(
+  <SimpleSearchHolder Component={HeaderSearch} />,
+  document.getElementById("headerSearch")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

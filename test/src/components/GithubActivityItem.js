@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import moment from 'moment';
 
-class GithubActivityItem extends Component {
+class GithubActivityItem extends React.Component {
   render() {
     const { activity } = this.props;
 

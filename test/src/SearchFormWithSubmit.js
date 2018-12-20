@@ -23,7 +23,7 @@ class SearchForm extends Component {
     const val = e.target.value;
     this.setState({
       searchText: val
-    })
+    });
   }
 
   submitForm(event) {
@@ -34,6 +34,7 @@ class SearchForm extends Component {
 
   render() {
     const { searchVisible } = this.props;
+    
     let searchClasses = ["searchInput"];
     if (searchVisible) {
       searchClasses.push("active");
@@ -48,6 +49,9 @@ class SearchForm extends Component {
           onChange={this.updateSearchInput.bind(this)}
           placeholder="Search..."
         />
+         {/* <div
+          onClick={this.showSearch.bind(this)}
+          className="fa fa-search searchIcon"></div> */}
       </form>
     );
   }

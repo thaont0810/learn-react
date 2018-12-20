@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import ActivityItem from './components/GithubActivityItem';
 
-const data = require('./data.json').slice(0, 4)
+const data = require('./data.json').slice(0, 4);
 
 class Content extends Component {
   constructor(props) {

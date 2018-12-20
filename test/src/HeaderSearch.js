@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./styles/header.css";
-import SearchForm from './SearchForm';
+import MenuButton from './components/MenuButton';
+import SearchForm from './SearchFormWithSubmit';
 
 class Header extends Component {
   constructor(props) {
@@ -19,22 +20,19 @@ class Header extends Component {
 
   render() {
     let searchInputClasses = ["searchInput"];
-    if (this.state.searchVisible) {
+    const {searchVisible} = this.state;
+    if (searchVisible) {
       searchInputClasses.push("active");
     }
     return (
       <div className="header">
-        <div className="menuIcon">
-          <div className="dashTop" />
-          <div className="dashBottom" />
-          <div className="circle" />
-        </div>
+        <MenuButton />
         <span className="title">{this.props.title}</span>
         {/* <input
-          type="text"
-          className={searchInputClasses.join(" ")}
-          placeholder="Search..."
-        /> */}
+          type="search"
+          className={searchInputClasses.join(' ')}
+          onChange={this.updateSearchInput.bind(this)}
+          placeholder="Search ..." /> */}
         <SearchForm
           searchVisible={this.state.searchVisible}
           onSubmit={this.props.onSubmit} />

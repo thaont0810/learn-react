@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Header from "./components/Header";
+// import Header from "./Header";
+import Header from "./HeaderSearch";
 import Content from './Content07';
 import Footer from './components/Footer';
 
@@ -8,7 +9,7 @@ const data = require('./data.json');
 const fetchEvents = () => Promise.resolve(data)
                       .then(json => json.slice(0, 4))
 
-class App extends Component {
+class Container extends Component {
   constructor(props) {
     super(props);
 
@@ -49,4 +50,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Container;

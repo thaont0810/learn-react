@@ -19,12 +19,14 @@ class Header extends Component {
 
   render() {
     let searchInputClasses = ['searchInput'];
+    
     if(this.state.searchVisible) {
       searchInputClasses.push('active');
     }
+    
     return (
       <div className="header">
-        <MenuButton />
+        <MenuButton name = 'menu'/>
         <span className="title">{this.props.title}</span>
         <input 
           type="text" 
@@ -39,6 +41,6 @@ class Header extends Component {
 }
 
 Header.defaultProps = {
-  title : 'aaaa'
+  title : 'default title'
 }
 export default Header;
