@@ -12,8 +12,6 @@ class Menu extends Component {
   }
 
   showDropDown() {
-    // console.log(11);
-
     this.setState({
       dropDown: !this.state.dropDown
     });
@@ -22,36 +20,29 @@ class Menu extends Component {
   render() {
     const { menus } = this.props;
     // console.log(menus);
-    // let caret = "nav-item";
-
-    // let dropDownClass = "dropdown";
-    // if (this.state.dropDown) {
-    //   dropDownClass += " show";
-    // }
     let thisMenu = this;
+
+    let dropDownClass = 'dropdown';
+    if(this.state.dropDown) {
+      dropDownClass += ' show';
+    }
 
     return (
       <div className="container">
         <ul className="nav">
-          {menus.map((menu) => {
-            return (
-              <li
-                className="nav-item"
-                onClick={thisMenu.showDropDown.bind(thisMenu)}
-              >
-                <a href="#" className="nav-link">
-                  {menu.title}
-                </a>
-
-                <SubMenu menu={menu} />
-                {/* <ul className={dropDownClass}>
-                  <li className="">
-                    <a>sss</a>
-                  </li>
-                </ul> */}
-              </li>
-            );
-          })}
+          {menus.map(menu => (
+            <li
+              key={menu.id}
+              className="nav-item"
+              onClick={thisMenu.showDropDown.bind(thisMenu)}
+            >
+              <a href="#" className="nav-link" key={menu.id}>
+                {menu.title}
+              </a>
+              {/* {!menu.dropdown ? null : <SubMenu menu={menu} />} */}
+              <SubMenu menu={menu}/>
+            </li>
+          ))}
         </ul>
       </div>
     );
