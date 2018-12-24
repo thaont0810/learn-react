@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Header from './HeaderSearch';
-import ActivityItem from './components/GithubActivityItem';
+import GithubActivityItem from './components/GithubActivityItem';
 
 const data = require('./data.json');
 
@@ -15,15 +15,15 @@ class ContentSearch extends Component {
     };
   }
 
-  componentDidMount() {
-    this.updateData();
-  }
-  componentWillReceiveProps(nextProps) {
-    // Check to see if the requestRefresh prop has changed
-    if (nextProps.requestRefresh === true) {
-      this.setState({loading: true}, this.updateData);
-    }
-  }
+  // componentDidMount() {
+  //   this.updateData();
+  // }
+  // componentWillReceiveProps(nextProps) {
+  //   // Check to see if the requestRefresh prop has changed
+  //   if (nextProps.requestRefresh === true) {
+  //     this.setState({loading: true}, this.updateData);
+  //   }
+  // }
 
   handleSearch = txt => {
     if (txt === '') {
@@ -42,15 +42,15 @@ class ContentSearch extends Component {
   };
 
   // Call out to github and refresh directory
-  updateData() {
-    this.setState(
-      {
-        loading: false,
-        activities: data
-      },
-      this.props.onComponentRefresh
-    );
-  }
+  // updateData() {
+  //   this.setState(
+  //     {
+  //       loading: false,
+  //       activities: data
+  //     },
+  //     this.props.onComponentRefresh
+  //   );
+  // }
 
   render() {
     const {loading, filtered} = this.state;
@@ -64,7 +64,7 @@ class ContentSearch extends Component {
           {loading && <div>Loading</div>}
           {/* Timeline item */}
           {filtered.map(activity => (
-            <ActivityItem key={activity.id} activity={activity} />
+            <GithubActivityItem key={activity.id} activity={activity} />
           ))}
         </div>
       </div>

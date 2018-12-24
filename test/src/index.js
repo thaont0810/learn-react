@@ -51,26 +51,26 @@ ReactDOM.render(
   <div className="notificationsFrame">
     <div className="panel">
       <Clock />
-      <Header title="Timeline" />
-      <Content activities={activityArr} />
-      <Notification />
+      {/* <Header title="Timeline" />  */}
+      {/* <Content activities={activityArr} /> */}
+      {/* <Notification /> */}
       {/* <Container /> */}
-      {/* <ContentSearch /> */}
+      <ContentSearch />
       {/* <SimpleSearchHolder Component= {HeaderSearch}/> */}
     </div>
   </div>,
   document.getElementById("demo1")
 );
 
-ReactDOM.render(
-  <SimpleSearchHolder Component={SearchFormWithSubmit} />,
-  document.getElementById("searchFormWithSubmit")
-);
+// ReactDOM.render(
+//   <SimpleSearchHolder Component={SearchFormWithSubmit} />,
+//   document.getElementById("searchFormWithSubmit")
+// );
 
-ReactDOM.render(
-  <SimpleSearchHolder Component={HeaderSearch} />,
-  document.getElementById("headerSearch")
-);
+// ReactDOM.render(
+//   <SimpleSearchHolder Component={HeaderSearch} />,
+//   document.getElementById("headerSearch")
+// );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

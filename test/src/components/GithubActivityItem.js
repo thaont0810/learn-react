@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+// import moment from 'moment';
 
 class GithubActivityItem extends React.Component {
   render() {
@@ -14,7 +14,7 @@ class GithubActivityItem extends React.Component {
         </div>
 
         <span className={'time'}>
-          {moment(activity.created_at).fromNow()}
+          {/* {moment(activity.created_at).fromNow()} */}
         </span>
         
         <p>{activity.actor.display_login} {activity.payload.action}</p>
