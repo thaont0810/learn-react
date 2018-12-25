@@ -4,7 +4,7 @@ import DogList from "./DogList";
 import axios from "axios";
 import Suggestions from "./Suggestions";
 
-const API_URL = "https://thedogapi.com/";
+// const API_URL = "https://thedogapi.com/";
 
 class Search extends Component {
   constructor(props) {
@@ -13,19 +13,22 @@ class Search extends Component {
     this.state = {
       searchWords: "",
       results: [],
-      suggestions: []
+      suggestions: [],
+      loading: true
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount = () => {
+  componentDidMount() {
     axios
       .get(
-        "https://api.thedogapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=100"
+        "https://api.thedogapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=DESC&page=0&limit=100"
       )
       .then(({ data }) => {
         this.setState({
-          results: data
+          results: data,
+          suggestions: data,
+          loading: false
         });
       })
       .catch(err => {
@@ -34,13 +37,10 @@ class Search extends Component {
   };
 
   getSuggestions(searchWords) {
-    let r = this.state.results.filter(
-      item =>
-        item.breeds[0].name.toLowerCase().indexOf(searchWords.toLowerCase()) !== -1
+    let r = this.state.results.filter(item =>
+      item.breeds[0].name.toLowerCase().indexOf(searchWords.toLowerCase()) !== -1
     );
-    this.setState({
-      results: r
-    });
+    return r;
   }
 
   handleChange(event) {
@@ -48,24 +48,23 @@ class Search extends Component {
     this.setState({
       searchWords
     });
-
-    if (searchWords.length > 0) {
+    if(searchWords.length > 0) {
       const suggestions = this.getSuggestions(searchWords);
       this.setState({
-        suggestions
+        suggestions: suggestions
       });
     } else {
       this.setState({
-        suggestions: []
+        suggestions: this.state.results
       });
     }
   }
 
   render() {
     // console.log(this.state.results);
-
+    const { loading } = this.state;
     return (
-      <div className='container'>
+      <div className="container">
         <form action="">
           <input
             className="input"
@@ -77,7 +76,11 @@ class Search extends Component {
           {/* <p>{this.state.inputVal}</p> */}
         </form>
         {/* <DogList doglist = {this.state.results}/> */}
-        <Suggestions suggestions={this.state.results} />
+        {!loading ? (
+          <Suggestions suggestions={this.state.suggestions} />
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     );
   }
