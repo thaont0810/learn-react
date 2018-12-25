@@ -55,7 +55,7 @@ ReactDOM.render(
       {/* <Content activities={activityArr} /> */}
       {/* <Notification /> */}
       {/* <Container /> */}
-      <ContentSearch />
+      {/* <ContentSearch /> */}
       {/* <SimpleSearchHolder Component= {HeaderSearch}/> */}
     </div>
   </div>,
@@ -67,10 +67,10 @@ ReactDOM.render(
 //   document.getElementById("searchFormWithSubmit")
 // );
 
-// ReactDOM.render(
-//   <SimpleSearchHolder Component={HeaderSearch} />,
-//   document.getElementById("headerSearch")
-// );
+ReactDOM.render(
+  <SimpleSearchHolder Component={HeaderSearch} />,
+  document.getElementById("headerSearch")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

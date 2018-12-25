@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import ReactDom from "react-dom";
-import DogList from './DogList';
+import DogList from "./DogList";
 import axios from "axios";
-import Suggestion from './Suggestion';
+import Suggestions from "./Suggestions";
 
-
-// const { API_KEY } = "777a0fdf-667f-4194-af4c-53299dd7a360";
 const API_URL = "https://thedogapi.com/";
 
 class Search extends Component {
@@ -13,69 +11,75 @@ class Search extends Component {
     super(props);
 
     this.state = {
-      filtered: "",
-      // loading: false
+      searchWords: "",
+      results: [],
+      suggestions: []
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  getInfo = () => {
+  componentWillMount = () => {
     axios
       .get(
         "https://api.thedogapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=100"
       )
       .then(({ data }) => {
         this.setState({
-          results: data,
-          loading: true
+          results: data
         });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
-      })
-
-  }
-
-  handleSearch = () => {
-    this.setState(
-      {
-        filtered: this.inputValue.value
-      },
-      () => {
-        if (this.state.filtered && this.state.filtered.length > 1) {
-          if (this.state.filtered.length % 2 === 0) {
-            this.getInfo()
-          }
-        } else if (!this.state.inputValue) {}
-      }
-    );
+      });
   };
 
+  getSuggestions(searchWords) {
+    let r = this.state.results.filter(
+      item =>
+        item.breeds[0].name.toLowerCase().indexOf(searchWords.toLowerCase()) !== -1
+    );
+    this.setState({
+      results: r
+    });
+  }
+
+  handleChange(event) {
+    const searchWords = event.target.value;
+    this.setState({
+      searchWords
+    });
+
+    if (searchWords.length > 0) {
+      const suggestions = this.getSuggestions(searchWords);
+      this.setState({
+        suggestions
+      });
+    } else {
+      this.setState({
+        suggestions: []
+      });
+    }
+  }
+
   render() {
-      // if(this.state.loading) {
-      // console.log(this.state.results);  
+    // console.log(this.state.results);
 
-        return (
-          <div>
-            <form action="">
-              <input
-                className="input"
-                type="text"
-                placeholder="Search for ..."
-                ref={input => (this.inputValue = input)}
-                onChange={this.handleSearch.bind(this)}
-              />
-              <p>{this.state.filtered}</p>
-            </form>
-            {/* <DogList doglist = {this.state.results}/> */}
-            <Suggestion results={this.state.results}/>
-
-          </div>
-        )
-      // } else {
-        // return (
-        //   <p>loading</p>
-        // )
-      // }
+    return (
+      <div className='container'>
+        <form action="">
+          <input
+            className="input"
+            type="text"
+            placeholder="Search for ..."
+            value={this.state.searchWords}
+            onChange={this.handleChange}
+          />
+          {/* <p>{this.state.inputVal}</p> */}
+        </form>
+        {/* <DogList doglist = {this.state.results}/> */}
+        <Suggestions suggestions={this.state.results} />
+      </div>
+    );
   }
 }
 
